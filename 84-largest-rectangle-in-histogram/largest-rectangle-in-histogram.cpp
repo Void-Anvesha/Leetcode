@@ -23,6 +23,7 @@ vector<int> nextSmallerElement(vector<int> &arr, int n)
 
 vector<int> prevSmallerElement(vector<int>&arr,int n)
 {
+    ////In pse we will store the index
     vector<int>pse(n);
     stack<int> st;
     for(int i=0;i<n;i++)
