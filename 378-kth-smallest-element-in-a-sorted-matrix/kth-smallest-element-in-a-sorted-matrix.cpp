@@ -1,35 +1,38 @@
 class Solution {
 public:
-    int kthSmallest(vector<vector<int>>& matrix, int k) {
-        int n=matrix.size();
-        //Pair : {el,{row,col}}
-        priority_queue<
-          pair<int,pair<int,int>>,
-          vector< pair<int,pair<int,int>>>,
-          greater<pair<int,pair<int,int>>>
-          >p;
-
-          //push the 1sst el of each row in a Sorted Matrix
-          for(int i=0;i<n;i++)
-          {
-            p.push({matrix[i][0],{i,0}});
-          }
-
-        pair<int,pair<int,int>>el;
-        int ans=-1;
-        int i,j;
-        while(k--)
-        {
-            el=p.top();
-            p.pop();
-            ans=el.first;
-            i=el.second.first;
-            j=el.second.second;
-            if(j+1<n)
-            {
-                p.push({matrix[i][j+1],{i,j+1}});
+    int countEl(int mid, vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        int i = n - 1;
+        int j = 0;
+        int cnt = 0;
+        
+        while (i >= 0 && j < n) {
+            if (matrix[i][j] <= mid) {
+                cnt += (i + 1);
+                j++;
+            } else {
+                i--;
             }
-
+        }
+        return cnt;
+    }
+    
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        int left = matrix[0][0];
+        int right = matrix[n-1][n-1];
+        
+        int ans = left;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int temp = countEl(mid, matrix);
+            
+            if (temp >= k) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
         }
         return ans;
     }
