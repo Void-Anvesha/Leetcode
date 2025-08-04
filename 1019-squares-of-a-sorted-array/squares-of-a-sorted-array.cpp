@@ -7,7 +7,6 @@ public:
             nums[i]=temp*temp;
         }
         sort(nums.begin(),nums.end());
-
         return nums;
     }
 };
