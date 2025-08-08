@@ -12,14 +12,15 @@
 class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        
-        //If both the nodes are NULL
-        if(p==NULL && q==NULL) return true;
+        //Base case
+        //p: Root of 1st Tree
+        //q:Root og 2nd tree
+        if(p==NULL || q==NULL) return p==q;
 
-        //One of them is NULL
-        if(p==NULL || q==NULL) return false;
+        bool isLeftSame=isSameTree(p->left,q->left);
+        bool isRightSame=isSameTree(p->right,q->right);
 
-        return (p->val==q->val) && isSameTree(p->left,q->left) 
-        && isSameTree(p->right,q->right);
+        return isLeftSame && isRightSame && ( p->val==q->val);
+
     }
 };
