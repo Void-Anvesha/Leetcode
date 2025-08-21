@@ -1,24 +1,22 @@
 class Solution {
 public:
-    bool isValid(string str) {
-        stack<char> st;
-        for(int i=0;i<str.size();i++)
+    bool isValid(string s) {
+        stack<char>st;
+        for(int i=0;i<s.size();i++)
         {
-            if(str[i]=='(' || str[i]=='{' || str[i]=='['){
-            st.push(str[i]);  }
-            else{ //For closing
-                if(st.empty()) return false; //stack is empty & you're trying to match
-                if((st.top()=='(' && str[i]==')') ||
-                 (st.top()=='{' && str[i]=='}') ||
-                  (st.top()=='[' && str[i]==']'))
-                {
-                    st.pop();
-                }
-                else{ //No match
-                    return false;
-                }}
+            if(s[i]=='(' || s[i]=='{'  || s[i]=='[' ) st.push(s[i]);
+            else{
+                //stack is empty
+                if(st.empty())return false;
+                char top=st.top();
+                if (s[i]==')' && top!='(' 
+                || s[i]==']' && top!='['
+                || s[i]=='}' && top!='{') return false;
+                 
+                //Match
+                st.pop();
+            }       
         }
-        //If the stack is empty then all the brackets are matched
-        return st.empty();
+           return st.empty();
     }
 };
