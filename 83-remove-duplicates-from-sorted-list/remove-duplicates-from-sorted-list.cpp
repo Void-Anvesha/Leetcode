@@ -11,9 +11,10 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if(head==NULL) return head;
+        if(head==NULL || head->next==NULL) return head;
         ListNode* left=head;
         ListNode* right=head->next;
+
         while(right!=NULL)
         {
             if(left->val==right->val)
@@ -26,6 +27,5 @@ public:
             right=right->next;
         }
         return head;
-
     }
 };
