@@ -1,28 +1,19 @@
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
-        string ans="";
+        if(strs.size()==0) return "";
 
-        //For traversing all the characters of the 1st string
-        for(int i=0;i<strs[0].length();i++)
+        for(int i=0;i<strs[0].size();i++)
         {
-            char ch=strs[0][i];
-            bool match=true;
-
-            //For comparing ch with remaining strings
+            char currChar=strs[0][i];
             for(int j=1;j<strs.size();j++)
             {
-                //Not Match
-                if(strs[j].size()<i || ch!=strs[j][i]){
-                    match=false;
-                    break;
-                }    
+                //Mismatch
+                if(i==strs[j].size() || currChar!=strs[j][i])
+                 return strs[0].substr(0,i);
             }
-            if(match==false)break;
-            else ans.push_back(ch);
-
-
         }
-        return ans;
+        //1st string is the common prefix
+        return strs[0];
     }
 };
