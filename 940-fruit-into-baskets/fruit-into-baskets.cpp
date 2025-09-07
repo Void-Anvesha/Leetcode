@@ -9,11 +9,12 @@ public:
         {
             mp[fruits[r]]++;
             if(mp.size()>2){
-              mp[fruits[l]]--;
-              if(mp[fruits[l]]==0)mp.erase(fruits[l]);
-              l++;
+                while(mp.size()>2){
+                    mp[fruits[l]]--;
+                    if(mp[fruits[l]]==0)mp.erase(fruits[l]);
+                    l++;
+                }
             }
-            
             if(mp.size()<=2){
             maxLen=max(maxLen,r-l+1);}
             r++;
