@@ -11,28 +11,26 @@
  */
 class Solution {
 public:
-    TreeNode* insertIntoBST(TreeNode* root, int val) {
+    TreeNode* insertIntoBST(TreeNode* root, int val) {\
+    //Base Case
         if(root==NULL) return new TreeNode(val);
         TreeNode* curr=root;
-        while(true)
-        {
-        if(curr->val<=val) {
-            if(curr->right!=NULL) curr=curr->right;
+        while(true){
+            if(curr->val<=val){
+                if(curr->right!=NULL)curr=curr->right;
+                else {
+                    curr->right=new TreeNode(val);
+                    break;
+                } 
+            }
             else{
-                curr->right=new TreeNode(val);
-                break;
-            }}
-
-        else{
-            if(curr->left!=NULL) curr=curr->left;
-            else{
-                curr->left=new TreeNode(val);
-                break;
+                if(curr->left!=NULL)curr=curr->left;
+                else{
+                    curr->left=new TreeNode(val);
+                    break;
+                }
             }
         }
-        }
-        
         return root;
-        
     }
 };
