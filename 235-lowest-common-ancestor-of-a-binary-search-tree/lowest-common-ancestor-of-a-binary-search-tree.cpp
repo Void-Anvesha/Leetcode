@@ -1,22 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root==NULL || root==p || root==q) return root;
+        if(root==NULL)return NULL;
+        int curr=root->val;
 
-        TreeNode* left= lowestCommonAncestor(root->left,p,q);
-        TreeNode* right= lowestCommonAncestor(root->right,p,q);
-
-        if(left==NULL)
-        {
-            return right;
+        if(curr<p->val && curr<q->val){
+            return lowestCommonAncestor(root->right,p,q);
         }
-        else if(right==NULL)
-        {
-            return left;
+        if(curr>p->val && curr>q->val){
+            return lowestCommonAncestor(root->left,p,q);
         }
-        else{ 
-            //Left & right both are not null , the result is found
-            return root;
-        }
+        //If there is a root & in 1 side p is there & the other side q 
+        //Then the particular root is LCA
+        return root;
     }
 };
