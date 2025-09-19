@@ -5,18 +5,12 @@ public:
         int n2=s.size();
         sort(g.begin(),g.end());
         sort(s.begin(),s.end());
-        int right=0;
-        int left=0;
-
-        while(left<n2 && right<n1)
-        {
-            if(s[left]>=g[right])
-            {
-                right++;
-            }
-            left++;
-           
+        int l=0,r=0;
+        while(l<n2 && r<n1){
+            if(s[l]>=g[r])r++;
+            l++;
         }
-        return right;
+        return r;
+
     }
 };
