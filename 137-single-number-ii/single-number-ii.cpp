@@ -1,16 +1,20 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        unordered_map<int,int>mp;
-        for(int num:nums){
-            mp[num]++;
+        int res=0;
+        for(int k=0;k<=31;k++){
+            int temp=(1<<k);
+            int cntZeros=0,cntOnes=0;
+
+            for(int num:nums){
+                //To find out the kth bit of each number
+                  if((num&temp)==0)cntZeros++;
+                  else cntOnes++;
+            }
+            if(cntOnes%3==1){
+                res=(res|temp);
+            }
         }
-         int ans=0;
-        for(auto& it:mp){
-            if(it.second==1){
-            ans=it.first;
-            break;}
-        }
-        return ans;
+        return res;
     }
 };
