@@ -1,11 +1,7 @@
 class Solution {
 public:
     int hammingWeight(int n) {
-        int cnt=0;
-        while(n>0){
-            cnt+=(n%2);
-            n/=2;
-        }
-        return cnt;
+        //Built-in function to count the no of set bits
+        return __builtin_popcount(n);
     }
 };
