@@ -2,7 +2,7 @@ class Solution {
 public:
     int countCompleteSubarrays(vector<int>& nums) {
         int n = nums.size();
-        //Unique el
+        //Store Unique el
         unordered_set<int>st(nums.begin() , nums.end());
         int totalUnique = st.size();
         int i=0 ,  j=0;
