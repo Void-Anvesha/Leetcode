@@ -1,24 +1,15 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int n=nums.size();
+        unordered_map<int , int>mp;
 
-        //Vector for storing indices
-        vector<pair<int,int>>numsWithIndex;
+        for(int i =0; i < nums.size(); i++){
 
-        for(int i=0;i<n;i++){
-           numsWithIndex.push_back({nums[i],i});
-        }
+            int need = target - nums[i];
 
-        sort(numsWithIndex.begin(),numsWithIndex.end());
+            if(mp.count(need)) return {mp[need] , i};
 
-        int l=0;
-        int r=n-1;
-        while(l<r){
-            int sum=numsWithIndex[l].first+numsWithIndex[r].first;
-            if(sum==target) return {numsWithIndex[l].second,numsWithIndex[r].second};
-            else if(sum<target)l++;
-            else r--;
+            mp[nums[i]] = i;
         }
         return {};
     }
