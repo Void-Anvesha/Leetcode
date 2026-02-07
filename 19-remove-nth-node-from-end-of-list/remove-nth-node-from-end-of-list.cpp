@@ -11,36 +11,31 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        
+        ListNode* fast = head;
+        ListNode* slow = head;
 
-    // Write your code here.
-    ListNode* fast=head;
-    ListNode* slow=head;
-    for(int i=0;i<n ;i++)
-    {
-        fast=fast->next;
-    }
-    if(fast==NULL)
-    {
-       ListNode* deleteHead=head;
-       head=head->next;
-       delete(deleteHead);
-       return head;
-    }
-
-    while(fast->next!=NULL)
-    {
-        fast=fast->next;
-        slow=slow->next;
-    }
-
-    
-    ListNode* deleteNode=slow->next;
-    slow->next=slow->next->next;
+        //Move fast for N steps
+        //So that we reach before (N-1)th index
+        for(int i = 0; i < n; i++){
+            fast = fast->next;
+        }
+      //delete head
+        if(fast == NULL){
+          ListNode* deleteNode = head;
+          head = head->next;
+          delete(deleteNode);
+          return head;
+        }
+        // Now, move both fast & slow pointer
+        while(fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next;
+        }
+    //Now the slow->next is to be deleted
+    ListNode* deleteNode = slow->next;
+    slow->next = slow->next->next;
     delete(deleteNode);
+
     return head;
-
-
-   
     }
 };
