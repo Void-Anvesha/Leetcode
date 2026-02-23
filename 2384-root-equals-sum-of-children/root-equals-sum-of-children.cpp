@@ -12,15 +12,18 @@
 class Solution {
 public:
     bool checkTree(TreeNode* root) {
-        if(root==NULL) return true;
-        if(root->left==NULL && root->right==NULL) return true;
+        if(root == NULL)return true;
+        //If both are null return true
+        if(root->left == NULL && root->right == NULL)return true;
 
-        int leftData=(root->left!=NULL)?root->left->val:0;
-        int rightData=(root->right!=NULL)?root->right->val:0;
+        int leftVal = 0, rightVal = 0;
+        if(root->left) leftVal = root->left->val;
+        if(root->right) rightVal = root->right->val;
 
-        return (root->val==(root->left->val+root->right->val))&&
-               checkTree(root->left) &&
-               checkTree(root->right);
-               
+        if(leftVal + rightVal != root->val)return false;
+        //Check for subtrees
+        return checkTree(root->left) && checkTree(root->right);
+
+
     }
 };
