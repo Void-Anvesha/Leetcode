@@ -1,26 +1,29 @@
 class Solution {
 public:
-    int t[201][201];
-    int solve(int i , int j , int m , int n , vector<vector<int>>& grid){
-
-        if(i == m-1 && j == n-1)return grid[i][j];
-        
-        if(t[i][j] != -1)return t[i][j];
-        //only go right
-        if(i == m-1) return t[i][j] = grid[i][j] + solve(i , j+1 , m , n , grid);
-        //can only go down
-        else if(j == n-1) return t[i][j] = grid[i][j] + solve(i+1 , j , m , n , grid);
-        else{
-             
-    return t[i][j]= grid[i][j] + min(solve(i , j+1 , m , n , grid) , solve(i+1 ,j ,m , n , grid));
-        } 
-
-    }
     int minPathSum(vector<vector<int>>& grid) {
-        memset(t , -1 , sizeof(t));
         int m = grid.size();
         int n = grid[0].size();
+        vector<vector<int>>t(m , vector<int>(n));
+      //t[i][j] = min path to reach [i][j] from [0][0]
+        t[0][0] = grid[0][0];
 
-        return solve(0 , 0 , m , n, grid);
+        //Fill 1st row
+        for(int col = 1; col < n; col++){
+            t[0][col] = grid[0][col] + t[0][col-1];
+        }
+
+        //Fill 1st col
+        for(int row = 1; row < m; row++){
+            t[row][0] = grid[row][0] + t[row-1][0];
+        }
+
+        //Fill other cells
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+
+                t[i][j] = grid[i][j] + min(t[i-1][j] , t[i][j-1]);
+            }
+        }
+        return t[m-1][n-1];
     }
 };
